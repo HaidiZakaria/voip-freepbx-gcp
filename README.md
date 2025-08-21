@@ -44,3 +44,58 @@ voip-gcp-terraform/
 git clone https://github.com/HaidiZakaria/voip-freepbx-gcp.git
 cd voip-freepbx-gcp
 
+2️⃣ Initialize Terraform
+terraform init
+
+3️⃣ Deploy Infrastructure
+terraform apply
+
+➡️ This provisions a GCP VM with FreePBX installed.
+
+4️⃣ Access FreePBX UI
+
+Open browser: http://<EXTERNAL_VM_IP>/admin
+
+Login with FreePBX admin credentials
+
+5️⃣ Configure SIP Extensions
+
+Add a new extension inside FreePBX
+
+Use Zoiper (or any SIP client) with:
+
+Host: <EXTERNAL_VM_IP>
+
+Port: 5060
+
+Username/Password: (from FreePBX extension)
+
+
+🔒 Firewall Rules
+
+Terraform automatically creates:
+
+UDP 5060 → SIP signaling
+
+UDP 10000–20000 → RTP (media streams)
+
+
+✅ Testing
+
+Register Zoiper with your extension credentials
+
+Place a test call between two extensions
+
+📌 Notes
+
+Do not commit .terraform/ or .tfstate files
+
+GCP charges apply → destroy resources when done:
+
+terraform destroy
+
+
+👤 Author
+
+Haidi Zakaria
+Cloud & Infrastructure Engineer | VoIP Enthusiast
